@@ -36,13 +36,13 @@ class RenderSystem(
 
     private fun addConfetti() {
         particles.add(Confetti(
-                location = Vector(location.x, location.y),
-                size = sizes[random.nextInt(sizes.size)],
-                shape = shapes[random.nextInt(shapes.size)],
-                color = colors[random.nextInt(colors.size)],
-                lifespan = config.timeToLive,
-                fadeOut = config.fadeOut,
-                velocity = this.velocity.getVelocity())
+            location = Vector(location.x, location.y),
+            size = sizes[random.nextInt(sizes.size)],
+            shape = shapes[random.nextInt(shapes.size)],
+            color = colors[random.nextInt(colors.size)],
+            lifespan = config.timeToLive,
+            fadeOut = config.fadeOut,
+            velocity = this.velocity.getVelocity())
         )
     }
 
@@ -51,7 +51,7 @@ class RenderSystem(
 
         for (i in particles.size - 1 downTo 0) {
             val particle = particles[i]
-            particle.applyForce(gravity)
+            //particle.applyForce(gravity)
             particle.render(canvas, deltaTime)
             if (particle.isDead()) particles.removeAt(i)
         }

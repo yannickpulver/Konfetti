@@ -1,13 +1,11 @@
 package nl.dionsegijn.konfetti
 
-import android.content.res.Resources
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.RectF
 import nl.dionsegijn.konfetti.models.Shape
 import nl.dionsegijn.konfetti.models.Size
 import nl.dionsegijn.konfetti.models.Vector
-import java.util.Random
 
 class Confetti(
     var location: Vector,
@@ -24,7 +22,7 @@ class Confetti(
     private var width = size.sizeInPx
     private val paint: Paint = Paint()
 
-    private var rotationSpeed = 1f
+    private var rotationSpeed = 0f
     private var rotation = 0f
     private var rotationWidth = width
     private var rectF = RectF()
@@ -32,12 +30,10 @@ class Confetti(
     // Expected frame rate
     private var speedF = 60f
 
-    private var alpha: Int = 255
+    private var alpha: Int = 100
 
     init {
-        val minRotationSpeed = 0.29f * Resources.getSystem().displayMetrics.density
-        val maxRotationSpeed = minRotationSpeed * 3
-        rotationSpeed = maxRotationSpeed * Random().nextFloat() + minRotationSpeed
+        rotationSpeed = 0f
         paint.color = color
     }
 
@@ -111,7 +107,6 @@ class Confetti(
         rectF.set(left, location.y, right, location.y + getSize())
 
         canvas.save()
-        canvas.rotate(rotation, rectF.centerX(), rectF.centerY())
         when (shape) {
             Shape.CIRCLE -> canvas.drawOval(rectF, paint)
             Shape.RECT -> canvas.drawRect(rectF, paint)
